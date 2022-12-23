@@ -8,12 +8,14 @@ namespace TAB
     public class Plugin : BaseUnityPlugin
     {
         public static GameObject Hook;
-        private const string KeybindSectionName = "Keybinds";
+        const string KeybindSectionName = "Keybinds";
         internal static ConfigEntry<KeyboardShortcut> TogglePause;
-        private void Awake()
+        void Awake()
         {
             TogglePause = Config.Bind(KeybindSectionName, "Toggle Pause", new KeyboardShortcut(KeyCode.P));
             Logger.LogInfo($"TAB: Loading");
+            new WorldTickPatch().Enable();
+            new OtherWorldTickPatch().Enable();
             Hook = new GameObject("TAB");
             Hook.AddComponent<TABController>();
             DontDestroyOnLoad(Hook);
