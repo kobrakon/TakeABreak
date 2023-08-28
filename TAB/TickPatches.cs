@@ -9,7 +9,7 @@ namespace TAB
         protected override MethodBase GetTargetMethod() => typeof(GameWorld).GetMethod("DoWorldTick", BindingFlags.Instance | BindingFlags.Public);
 
         [PatchPrefix]
-        static bool Prefix() => !TABController.isPaused;
+        static bool Prefix() => !TABController.m_isPaused;
     }
 
     public class OtherWorldTickPatch : ModulePatch
@@ -17,6 +17,6 @@ namespace TAB
         protected override MethodBase GetTargetMethod() => typeof(GameWorld).GetMethod("DoOtherWorldTick", BindingFlags.Instance | BindingFlags.Public);
 
         [PatchPrefix]
-        static bool Prefix() => !TABController.isPaused;
+        static bool Prefix() => !TABController.m_isPaused;
     }
 }
